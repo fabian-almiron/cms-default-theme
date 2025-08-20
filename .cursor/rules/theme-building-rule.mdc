@@ -1,129 +1,169 @@
----
-description: >
-  V2 THEME: Freedom-first, distinctness HARD MODE.
-  Must invent new layouts & components. No reuse of baseline JSX or long className strings.
-  Enforce a new container/spacing system and a new Hero structure.
+## Theme Generation Rules (Default-derived themes)
 
-globs:
-  - "components/themes/cms-default-theme/**"
-alwaysApply: true
----
+Purpose: Enable AI to generate a new theme based on the `default/` theme without breaking CMS integration. The generated theme must be self-contained, discoverable by the CMS, and immediately usable upon activation. Visual layout, composition, and structure of UI blocks are free to diverge significantly from the default to achieve a distinct design.
 
-# ✅ HARD CONTRACTS (do not break)
-- Do NOT modify: `main.js`.
-- Keep `register-blocks.tsx` exporting `themeRegistry` (existing keys must remain; you may add keys or remap to V2 components).
-- `ui/Header.tsx` prop shape must remain unchanged and **must** render:
-  - [data-mobile-menu-button]
-  - [data-mobile-menu]
-  - [data-mobile-menu-overlay]
-- Components are props-only (no fetching). Preserve any other data-* hooks used by `main.js`.
+### Golden rules
+- Preserve the folder structure and required files.
+- Keep the CMS integration contract identical: component metadata shape, registry API, Tailwind token mapping, and theme JS hooks.
+- You may add new UI components and page templates, but you must register components so they are available to the CMS at activation.
+- Layout and composition freedom: You may rearrange sections, change grid systems, spacing, and typography scale, add/remove sub-sections, and otherwise alter component internals to create a clearly different look and structure from the default.
+- Component freedom: You may create entirely new blocks, replace or remove default blocks, and introduce new categories as needed. Ensure all shipped blocks are correctly registered.
+- Dark mode is optional. Default to a high-quality light mode. Only include dark mode tokens and styles if explicitly requested.
 
-# 🧭 GOAL
-- Produce a **new DOM structure** and **new layout logic** for every remapped block.
-- Create a new home template: `page-templates/HomeV2.tsx` composing **only** V2 sections.
-- Use a **single shell container** class for width control; sections must not add their own global container wrappers.
+### Canonical structure for each theme
+The new theme must mirror this directory layout under `components/themes/<themeSlug>/` in the main app (this repo shows contents under a theme directory). This requirement applies to files and folders only; internal UI layouts and compositions are free to change:
 
-# 🧩 REGISTRY (required remaps; keep old keys present)
-- "Header"   -> `HeaderV2`
-- "Hero"     -> `HeroV2`
-- "Features" -> `FeatureGridV2`
-- "Footer"   -> `FooterV2`
-- Add ≥3 new blocks (free choice), e.g. `StatsBandV2`, `LogosMarqueeV2`, `TestimonialMasonryV2`, `CTAAsideV2`.
+- `ui/` — React blocks. Each file is a block (e.g., `Hero.tsx`, `Header.tsx`).
+- `page-templates/` — Optional full-page templates and README.
+- `register-blocks.tsx` — Central registry and theme metadata.
+- `tailwind.config.ts` — Theme-scoped Tailwind config.
+- `styles.css` — CSS variables and JS-paired styles.
+- `main.js` — Browser JS behaviors (smooth scroll, mobile menu, animations, forms).
+- `README.md` — Theme overview and workflow.
 
-# ⛔ ANTI-SAMENESS (strict)
-- **No copy/paste** of baseline JSX fragments or long className strings.
-- **Do not emit** any of these container patterns (case-insensitive, substring match):
-  - "max-w-screen-xl", "max-w-7xl", "container mx-auto", "px-4 sm:px-6 lg:px-8"
-- **Structure must change** in ≥6 dimensions across the page:
-  1) Different wrapper count / nesting depth
-  2) Different layout primitive (grid ↔ flex; named areas vs equal cols)
-  3) Different container strategy (CSS vars + clamp) — no Tailwind “container”
-  4) Different spacing rhythm (section paddings and gaps)
-  5) Reordered content hierarchy within sections
-  6) Different media treatment (placement/aspect/overflow/interaction)
-- **HeroV2** must be structurally distinct from baseline:
-  - Use **CSS Grid with named areas** (or a split-panel layout) if baseline used stacked flex.
-  - Introduce at least one **new region** (e.g., CTA rail, metrics strip, sticky media).
-  - Change the **content order** (e.g., H1 before eyebrow; buttons before copy).
+### Theme naming and prefixing
+- Define a human `themeName` (e.g., "Ocean").
+- Define a kebab-case slug `themeSlug` (e.g., `ocean`).
+- Define a CSS variable prefix `--<themeSlug>-*` (e.g., `--ocean-primary`).
+- For compatibility, either:
+  - Keep the JS namespace `window.DefaultTheme`, or
+  - Provide both `window.DefaultTheme` and `window[PascalCase(themeSlug)]` pointing to the same object.
 
-# 🎛 CONTAINER & SPACING SYSTEM (must implement)
-- Define the shell and section rhythm using CSS variables; consume via Tailwind arbitrary values.
-- Only the page shell controls width; sections **must not** add another `mx-auto`/container.
+### File requirements
 
-# 🔧 TOKEN & THEME WIRING (must implement)
-- Add to `styles.css` under `:root`:
-  - `--shell-max`, `--container-x`, `--section-y`, `--gap-y`, `--brand`, `--accent`, `--radius-lg`
-- In `tailwind.config.ts` `theme.extend`:
-  - colors: `brand`, `accent` via `rgb(var(--brand)/<alpha-value>)`
-  - spacing: `{ container: 'var(--container-x)' }`
-  - borderRadius: `{ lg: 'var(--radius-lg)' }`
-- Use tokens in components (e.g., `px-[var(--container-x)]`, `gap-[var(--gap-y)]`, `rounded-[var(--radius-lg)]`).
+#### 1) register-blocks.tsx (mandatory)
+- Must export theme metadata:
+  - `export const themeName = '<Human Name>'`
+  - `export const themeDescription = '<Short description>'`
+  - `export const themeAuthor = '<Author or generator>'`
+  - `export const themeVersion = '<semver>'`
+- Must import every component default export and its `metadata` from `./ui/*`.
+- Must define and export:
+  - `componentRegistry` — object mapping `type` to component.
+  - `componentInfo: ComponentInfo[]` — array of all imported metadata objects.
+  - Helper APIs (unchanged): `getComponent`, `renderComponent`, `getComponentInfo`, `getAllComponents`, `getComponentsByCategory`.
+- Keep the `process.env.NODE_ENV === 'development'` debug logs allowed.
+- Do not change the import path for `ComponentInfo` (must be `@/lib/cms-types`).
 
-# 🏗 REQUIRED FILES TO (RE)GENERATE
-- `components/themes/cms-default-theme/page-templates/HomeV2.tsx`
-  - Renders a `<div className="v2-shell">` root; inside it, a single width container: `<div className="v2-container">`.
-  - Composes only V2 sections in `<main className="v2-main space-y-[var(--section-y)]">`.
-- `components/themes/cms-default-theme/ui/HeaderV2.tsx`
-  - Keep prop shape identical; render the three required data-* hooks.
-- `components/themes/cms-default-theme/ui/HeroV2.tsx`
-  - New structure (see Anti-sameness).
-- `components/themes/cms-default-theme/ui/FeatureGridV2.tsx`
-- `components/themes/cms-default-theme/ui/FooterV2.tsx`
-- Plus ≥3 brand-new sections of your choice.
+Component auto-registration rule: Whenever a new file is added in `ui/`, it must be imported in `register-blocks.tsx`, added to `componentRegistry`, and its `metadata` added to `componentInfo`.
 
-# 🧪 VALIDATION (generator must ensure before finishing)
-- `register-blocks.tsx` shows the remaps and **imports the V2 components**.
-- `HomeV2.tsx` imports **only** V2 components, wrapped in `.v2-shell > .v2-container > .v2-main`.
-- No className contains forbidden container substrings listed above.
-- `HeaderV2` renders `[data-mobile-menu-button]`, `[data-mobile-menu]`, `[data-mobile-menu-overlay]`.
+#### 2) ui/* (mandatory per component)
+- Each block file must:
+  - Export a default React component.
+  - Export `metadata: ComponentInfo` with fields: `type` (unique string key), `name`, `description`, `category`, `icon`.
+  - Use allowed CMS imports only (e.g., `@/lib/cms-types`, `@/lib/cms-data`, `@/hooks/use-navigation`, `@/components/ui/*`).
+  - Place `"use client"` at top if the component uses hooks or browser APIs.
+  - File name should be PascalCase and typically match `metadata.type`.
+- Valid `category` examples: `layout`, `content-blocks`, `navigation`, `media`, `forms`, `commerce`, `utilities`.
+- Keep alias imports using `@/` (do not rewrite to relative paths).
 
-# 🖼️ LAYOUT SPEC (reference — implement, don’t quote)
-- `.v2-shell` sets container width: `--container-width: min(var(--shell-max), 100vw - 2*var(--container-x))`.
-- `.v2-container` centers once: `max-w-[var(--container-width)] mx-auto px-[var(--container-x)]`.
-- Sections derive rhythm: `py-[var(--section-y)]` and internal `gap-[var(--gap-y)]`.
+Minimal component scaffold:
+```tsx
+// ui/MyBlock.tsx
+'use client'
+import { ComponentInfo } from '@/lib/cms-types'
 
-# 📣 SELF-CHECK (must `console.log` once on dev/build)
-- Print 6–10 **structural** changes (not color/typography).
-- Print component inventory:
-  - `new`: all *V2* components created
-  - `modified`: originals touched (should be minimal)
-  - `kept`: originals still present
-  - `registryRemaps`: map of old key → V2 component
-- Confirm header hooks (echo the query selectors).
-- Brief rationale (3–5 lines) for why the new layout suits the domain.
+export const metadata: ComponentInfo = {
+  type: 'MyBlock',
+  name: 'My Block',
+  description: 'Short description',
+  category: 'content-blocks',
+  icon: 'Star',
+}
 
-# 🧩 QUICK STUBS THE GENERATOR SHOULD USE (do not copy baseline)
-- Shell (applied at top-level page component):
-  - `<div className="v2-shell"><div className="v2-container"><main className="v2-main space-y-[var(--section-y)]">…</main></div></div>`
-- HeroV2:
-  - Grid with named areas (e.g., `"title media" "meta media" "cta media"`), or split with sticky media column.
-  - Buttons **before** body copy; optional metric/eyebrow inline with title.
-- FeatureGridV2:
-  - Asymmetric CSS grid (named areas or variable spans), not equal columns.
-- FooterV2:
-  - Three-region layout: newsletter rail, link clusters grid, legal column.
+export default function MyBlock(props: Record<string, any>) {
+  return <section data-animate className="container py-12">Hello</section>
+}
+```
 
-# 🚫 FALLBACKS TO AVOID
-- Do not render Tailwind `container` class anywhere.
-- Do not reintroduce nested `mx-auto` wrappers inside sections.
-- Do not reproduce baseline hero DOM order or media placement.
+#### 3) tailwind.config.ts (mandatory)
+- Keep structure similar to default theme:
+  - `darkMode` is optional. If not providing dark mode, you may omit the `darkMode` setting or keep `darkMode: ['class']` without defining `.dark` tokens.
+  - `content` globs must include all `ts/tsx` files in this theme, e.g. `./components/themes/<themeSlug>/**/*.{ts,tsx}`.
+  - Map Tailwind tokens to CSS variables using the theme prefix: `hsl(var(--<themeSlug>-primary))` etc.
+  - Preserve `tailwindcss-animate` plugin.
+- You may extend fonts, radii, keyframes, and animations.
 
-# ✅ EXAMPLE SELF-CHECK OUTPUT (shape)
-# {
-#   "structuralChanges": [
-#     "Hero: stack → grid with sticky media; new CTA rail; content order changed",
-#     "Shell: single width controller via CSS vars; removed nested containers",
-#     "Features: equal-cols → named-area grid with variable spans",
-#     "Spacing: global section rhythm via --section-y/--gap-y; removed per-section padding",
-#     "Footer: multi-region grid with newsletter rail",
-#     "Added marquee/testimonial bands with independent wrappers"
-#   ],
-#   "inventory": {
-#     "new": ["HeaderV2","HeroV2","FeatureGridV2","FooterV2","StatsBandV2","LogosMarqueeV2","TestimonialMasonryV2"],
-#     "modified": [],
-#     "kept": ["Header","Hero","Features","Footer"],
-#     "registryRemaps": { "Header":"HeaderV2","Hero":"HeroV2","Features":"FeatureGridV2","Footer":"FooterV2" }
-#   },
-#   "headerHooksConfirmed": ["[data-mobile-menu-button]","[data-mobile-menu]","[data-mobile-menu-overlay]"],
-#   "rationale": "Asymmetric layouts improve scan paths, single-shell container prevents spacing drift, and the new hero elevates narrative with sticky media and early CTAs."
-# }
+#### 4) styles.css (mandatory)
+- Under `@layer base`, define light tokens using the theme prefix `--<themeSlug>-*` for all keys mirroring the default set. Dark tokens are optional and should only be added if dark mode is explicitly requested:
+  - `--<themeSlug>-background`, `--<themeSlug>-foreground`, `--<themeSlug>-card`, `--<themeSlug>-card-foreground`, `--<themeSlug>-popover`, `--<themeSlug>-popover-foreground`, `--<themeSlug>-primary`, `--<themeSlug>-primary-foreground`, `--<themeSlug>-secondary`, `--<themeSlug>-secondary-foreground`, `--<themeSlug>-muted`, `--<themeSlug>-muted-foreground`, `--<themeSlug>-accent`, `--<themeSlug>-accent-foreground`, `--<themeSlug>-destructive`, `--<themeSlug>-destructive-foreground`, `--<themeSlug>-border`, `--<themeSlug>-input`, `--<themeSlug>-ring`, `--<themeSlug>-radius`.
+- Provide theme-prefixed utility classes analogous to default (e.g., `.ocean-hero-gradient`, `.ocean-card-hover`, `.ocean-text-gradient`, `.ocean-button-primary`).
+- Preserve JS-paired selectors and behaviors (names must remain exactly):
+  - `[data-mobile-menu]`, `[data-mobile-menu].open`, `body.menu-open`
+  - `[data-animate]`, `[data-animate].animate-in`
+  - `.form-field`, `.form-field input.error`, `.form-field input.has-value + label` etc.
+  - `html { scroll-behavior: smooth; }`
+
+#### 5) main.js (mandatory)
+- Must expose a global theme object with the same API surface:
+  - `name`, `version`, `init()`, `cleanup()`, and `utils` (`debounce`, `isInViewport`, `triggerEvent`).
+- Namespace requirement for compatibility: assign to `window.DefaultTheme`. You may also assign to `window[PascalCase(themeSlug)]` as an alias.
+- Behaviors to initialize in `init()`:
+  - Smooth scrolling for `a[href^="#"]`.
+  - Mobile menu toggling using `[data-mobile-menu-button]`, `[data-mobile-menu]`, `[data-mobile-menu-overlay]` and `body.menu-open`.
+  - IntersectionObserver scroll animations for `[data-animate]` adding `animate-in`.
+  - Form enhancements: floating labels via `.has-value`, required-field validation toggling `.error`.
+- Implement `cleanup()` that removes event listeners and observers.
+- Keep the DOM-ready auto-init logic.
+- Keep CommonJS export guard for module systems if present.
+
+#### 6) page-templates/* (optional)
+- May add full-page templates with default exports.
+- Templates may use `DNDArea` to mark dynamic content injection regions.
+- If you introduce a template registry later, avoid breaking or renaming the component registry.
+
+#### 7) README.md (recommended)
+- Explain theme concept, token choices, and how to build/use it with `npm run build:themes`.
+- List the blocks shipped and any templates.
+
+### CMS integration contract (must-not-break)
+- The CMS discovers blocks solely via `register-blocks.tsx`.
+- `ComponentInfo` type and import path (`@/lib/cms-types`) must be preserved.
+- Each block’s `metadata.type` must be unique and match the registry key.
+- Do not alter `getComponent`, `renderComponent`, or the metadata array shape.
+- Keep alias imports (`@/...`) intact; do not rewrite to relative paths.
+
+### Allowed libraries and patterns
+- Next.js primitives (`next/link`, `next/image`).
+- UI primitives from `@/components/ui/*` (e.g., `button`, `card`).
+- Icons from `lucide-react` (or compatible set used in the default theme).
+- Client components must declare `'use client'`.
+
+### Do / Don’t
+- Do: add new components in `ui/` with correct `metadata` and registry updates.
+- Do: adjust Tailwind tokens to your theme’s identity by changing CSS variable values and mapping.
+- Do: change layouts, grids, spacing, and component compositions to make the theme visually distinct.
+- Do: create brand-new blocks and remove or replace default ones if they’re not needed, as long as the registry reflects what ships.
+- Do: extend `main.js` with more behaviors if needed, but keep the existing hooks/selectors.
+- Don’t: remove existing helper APIs or change their signatures.
+- Don’t: change data-attribute hooks or classnames relied upon by JS.
+- Don’t: change CMS import paths, types, or alias configuration.
+- Don’t: implement dark mode unless it is explicitly requested for the theme.
+
+### QA checklist (must pass before delivering theme)
+- Structure:
+  - All required files present; `ui/` contains at least one block.
+  - `register-blocks.tsx` imports every block and exports `componentRegistry` and `componentInfo` correctly.
+- Types/Build:
+  - Type-check passes where applicable; no missing imports.
+  - Tailwind `content` globs include all theme files.
+- Runtime:
+  - `main.js` auto-inits and mobile menu toggles open/close via data attributes.
+  - `[data-animate]` elements animate on scroll.
+  - Form fields gain `.has-value` and `.error` as expected.
+- Styling:
+  - Light tokens apply; Tailwind colors resolve to theme variables. Dark mode (tokens/selectors) is optional and should only be present if requested.
+  - Theme-prefixed helper classes work (e.g., hero/text gradients, card hover).
+  - The theme exhibits meaningful visual and structural differentiation from the default (e.g., altered layouts, grids, spacing, and compositions).
+
+### Example: adapting tokens and config for a new theme
+- Choose `themeName = 'Ocean'`, `themeSlug = 'ocean'`.
+- In `styles.css`, define `--ocean-*` variables under `:root`. Add `.dark` only if dark mode is requested.
+- In `tailwind.config.ts`, map colors to `hsl(var(--ocean-...))`.
+- Keep JS hooks and selectors unchanged; `main.js` still assigns to `window.DefaultTheme` (and optionally `window.Ocean`).
+
+### Delivery contract
+- Provide the complete theme folder with all files above.
+- Ensure components are pre-registered in `register-blocks.tsx` so activating the theme in the CMS immediately exposes all blocks.
+
+
