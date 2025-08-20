@@ -18,58 +18,58 @@ export const metadata: ComponentInfo = {
 export default function Blog() {
   const blogPosts = [
     {
-      title: "10 Ways to Boost Your Team's Productivity",
-      description: "Discover proven strategies to enhance team collaboration and efficiency in the modern workplace.",
+      title: "How to choose photos for your monthly book",
+      description: "Quick tips for picking the moments that matter — without overthinking it.",
       author: "John Smith",
       date: "March 15, 2024",
       readTime: "5 min read",
-      category: "Productivity",
-      image: "/placeholder.svg?height=200&width=300&text=Productivity"
+      category: "Curation",
+      image: "/placeholder.svg?height=200&width=300&text=Curation"
     },
     {
-      title: "The Future of Remote Work",
-      description: "Exploring trends and technologies shaping the future of distributed teams and remote collaboration.",
+      title: "iPhone vs Android: getting the best print",
+      description: "Simple settings to ensure your phone photos look stunning on paper.",
       author: "Sarah Johnson",
       date: "March 12, 2024",
       readTime: "7 min read",
-      category: "Remote Work",
-      image: "/placeholder.svg?height=200&width=300&text=Remote+Work"
+      category: "Photo Tips",
+      image: "/placeholder.svg?height=200&width=300&text=Photo+Tips"
     },
     {
-      title: "Building Better Analytics Dashboards",
-      description: "Learn how to create compelling data visualizations that drive business insights and decisions.",
+      title: "Behind the paper: what makes prints archival?",
+      description: "We break down paper weight, finish, and longevity in plain English.",
       author: "Michael Chen",
       date: "March 10, 2024",
       readTime: "6 min read",
-      category: "Analytics",
-      image: "/placeholder.svg?height=200&width=300&text=Analytics"
+      category: "Printing",
+      image: "/placeholder.svg?height=200&width=300&text=Printing"
     },
     {
-      title: "Security Best Practices for Modern Teams",
-      description: "Essential security measures every organization should implement to protect sensitive data.",
+      title: "Design principles for timeless layouts",
+      description: "The layout rules we follow so your books look clean and modern year after year.",
       author: "Emily Rodriguez",
       date: "March 8, 2024",
       readTime: "8 min read",
-      category: "Security",
-      image: "/placeholder.svg?height=200&width=300&text=Security"
+      category: "Design",
+      image: "/placeholder.svg?height=200&width=300&text=Design"
     },
     {
-      title: "Streamlining Your Workflow with Automation",
-      description: "How to leverage automation tools to eliminate repetitive tasks and focus on strategic work.",
+      title: "Gifting Monthbook: ideas they’ll love",
+      description: "From baby’s first year to travel recaps — thoughtful gift subscriptions for everyone.",
       author: "David Kim",
       date: "March 5, 2024",
       readTime: "4 min read",
-      category: "Automation",
-      image: "/placeholder.svg?height=200&width=300&text=Automation"
+      category: "Gifting",
+      image: "/placeholder.svg?height=200&width=300&text=Gifting"
     },
     {
-      title: "Customer Success Stories: Real Results",
-      description: "See how companies are transforming their operations with our platform.",
+      title: "Customer spotlight: The Patel family’s year in books",
+      description: "How one family turned 12 months of phone photos into a library of memories.",
       author: "Lisa Wang",
       date: "March 3, 2024",
       readTime: "6 min read",
-      category: "Case Studies",
-      image: "/placeholder.svg?height=200&width=300&text=Success+Stories"
+      category: "Stories",
+      image: "/placeholder.svg?height=200&width=300&text=Stories"
     }
   ]
 
@@ -79,9 +79,9 @@ export default function Blog() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Blog</div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Latest Insights & Updates</h2>
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Tips, printing, and stories</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-              Stay informed with the latest trends, tips, and insights from our team of experts.
+              Everything you need to make beautiful monthly photobooks.
             </p>
           </div>
         </div>

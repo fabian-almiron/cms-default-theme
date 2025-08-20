@@ -16,34 +16,39 @@ export const metadata: ComponentInfo = {
 export default function Pricing() {
   const plans = [
     {
-      title: "Starter",
-      price: "$29",
-      description: "Perfect for small teams and startups",
-      features: ["Up to 5 team members", "Basic analytics", "24/7 email support", "1GB storage"],
-    },
-    {
-      title: "Professional",
-      price: "$79",
-      description: "Ideal for growing businesses",
+      title: "Lite",
+      price: "$12",
+      description: "Great for casual memory keepers",
       features: [
-        "Up to 20 team members",
-        "Advanced analytics",
-        "Priority support",
-        "10GB storage",
-        "Custom integrations",
+        "1 book per month (30 pages)",
+        "Auto‑import & smart layouts",
+        "Matte cover",
+        "Free US shipping",
+        "Skip or pause anytime",
       ],
     },
     {
-      title: "Enterprise",
-      price: "$199",
-      description: "For large organizations with complex needs",
+      title: "Classic",
+      price: "$20",
+      description: "Our most popular plan",
       features: [
-        "Unlimited team members",
-        "Enterprise analytics",
-        "Dedicated account manager",
-        "Unlimited storage",
-        "Custom development",
-        "SLA guarantees",
+        "1 book per month (60 pages)",
+        "Premium satin paper",
+        "Add captions & dates",
+        "Free US shipping",
+        "Skip or pause anytime",
+      ],
+    },
+    {
+      title: "Family",
+      price: "$35",
+      description: "For households with lots of photos",
+      features: [
+        "2 books per month (60 pages each)",
+        "Gift a copy to family",
+        "Priority printing",
+        "Worldwide shipping options",
+        "Skip or pause anytime",
       ],
     },
   ]
@@ -56,9 +61,9 @@ export default function Pricing() {
             <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
               Pricing
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Simple, transparent pricing</h2>
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Simple, photobook‑friendly plans</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-              Choose the plan that's right for your business. All plans include a 14-day free trial.
+              Pick the plan that fits your photos. All plans include a 14‑day free trial.
             </p>
           </div>
         </div>

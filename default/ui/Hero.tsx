@@ -21,10 +21,10 @@ export default function Hero() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                Streamline Your Workflow Like Never Before
+                Your month, printed beautifully
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Boost productivity, reduce overhead, and focus on what matters most with our all-in-one platform.
+                Automatically collect your best phone photos and receive a premium photobook delivered every month.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -32,7 +32,7 @@ export default function Hero() {
                 Start Free Trial <ChevronRight className="h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline">
-                View Demo
+                See Sample Book
               </Button>
             </div>
             <div className="flex items-center gap-2 text-sm">
@@ -49,12 +49,12 @@ export default function Hero() {
                 ))}
               </div>
               <div className="text-muted-foreground">
-                Trusted by <span className="font-medium text-foreground">2,000+</span> companies
+                Loved by families, travelers, and memory‑keepers
               </div>
             </div>
           </div>
           <Image
-            src="/placeholder.svg?height=550&width=550&text=Platform+Screenshot"
+            src="/placeholder.svg?height=550&width=550&text=Photobook+Preview"
             width={550}
             height={550}
             alt="Hero"

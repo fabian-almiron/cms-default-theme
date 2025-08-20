@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Zap } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 import { useNavigation } from '@/hooks/use-navigation'
 import { loadPagesFromDatabase } from '@/lib/cms-data'
 import { ComponentInfo } from '@/lib/cms-types'
@@ -76,8 +76,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container px-5 mx-auto flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Zap className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold">StreamLineee</span>
+          <BookOpen className="h-6 w-6 text-primary" />
+          <span className="text-xl font-bold">Monthbook</span>
         </Link>
         
         <nav className="hidden md:flex gap-6">

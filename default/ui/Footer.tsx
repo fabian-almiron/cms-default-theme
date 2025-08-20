@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Zap } from "lucide-react"
+import { BookOpen } from "lucide-react"
 import { ComponentInfo } from '@/lib/cms-types'
 
 // Component metadata - exported for automatic registration
@@ -19,11 +19,11 @@ export default function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <Zap className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">StreamLine</span>
+              <BookOpen className="h-6 w-6 text-primary" />
+              <span className="text-xl font-bold">Monthbook</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Streamlining workflows for businesses worldwide since 2023.
+              Monthly photobooks from your phone — automatic, beautiful, and delivered.
             </p>
           </div>
           <div className="space-y-4">
@@ -41,12 +41,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-foreground">
-                  Integrations
+                  Gift Subscriptions
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-foreground">
-                  Changelog
+                  How It Works
                 </Link>
               </li>
             </ul>
@@ -56,12 +56,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-foreground">
-                  Documentation
+                  Photo Quality Guide
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-foreground">
-                  Guides
+                  Print Specs
                 </Link>
               </li>
               <li>
@@ -71,7 +71,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-foreground">
-                  API
+                  FAQ
                 </Link>
               </li>
             </ul>
@@ -104,7 +104,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} StreamLine. All rights reserved.
+            © {new Date().getFullYear()} Monthbook. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link href="#" className="text-muted-foreground hover:text-foreground">

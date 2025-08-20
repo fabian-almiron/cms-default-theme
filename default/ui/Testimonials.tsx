@@ -16,21 +16,21 @@ export default function Testimonials() {
   const testimonials = [
     {
       quote:
-        "StreamLine has transformed how our team works. We've seen a 40% increase in productivity since implementing it.",
+        "Every month our family gathers to flip through the latest book. It's become our favorite ritual.",
       author: "Sarah Johnson",
-      role: "CTO, TechCorp",
+      role: "Mom of 2",
     },
     {
       quote:
-        "The analytics features alone are worth the investment. We now have insights we never had access to before.",
+        "I used to spend hours designing. Now it just shows up — beautifully printed and perfectly curated.",
       author: "Michael Chen",
-      role: "Operations Director, GrowthX",
+      role: "Travel Photographer",
     },
     {
       quote:
-        "Customer support is exceptional. Any issues we've had were resolved quickly and professionally.",
+        "We gifted a subscription to the grandparents. Seeing new photos every month makes their day.",
       author: "Emily Rodriguez",
-      role: "Project Manager, Innovate Inc.",
+      role: "Aunt & Dog‑mom",
     },
   ]
 
@@ -40,9 +40,9 @@ export default function Testimonials() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Testimonials</div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Loved by businesses worldwide</h2>
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Loved by families and storytellers</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-              Don't just take our word for it. Here's what our customers have to say about StreamLine.
+              Don't just take our word for it. Here's what our customers have to say about Monthbook.
             </p>
           </div>
         </div>

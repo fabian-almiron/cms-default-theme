@@ -19,10 +19,10 @@ export default function CTA() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Ready to streamline your workflow?
+              Ready to print your month?
             </h2>
             <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed">
-              Join thousands of satisfied customers who have transformed their business with StreamLine.
+              Join thousands turning camera rolls into keepsakes with Monthbook.
             </p>
           </div>
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -30,10 +30,10 @@ export default function CTA() {
               Start Your Free Trial <ChevronRight className="h-4 w-4" />
             </Button>
             <Button size="lg" variant="outline">
-              Contact Sales
+              See Sample Book
             </Button>
           </div>
-          <p className="text-sm text-muted-foreground">No credit card required. 14-day free trial.</p>
+          <p className="text-sm text-muted-foreground">No credit card required. 14‑day free trial.</p>
         </div>
       </div>
     </section>

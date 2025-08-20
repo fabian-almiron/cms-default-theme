@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { LineChart, MessageSquare, Shield } from "lucide-react"
+import { Smartphone, Wand2, Truck } from "lucide-react"
 import { ComponentInfo } from '@/lib/cms-types'
 
 // Component metadata - exported for automatic registration
@@ -19,14 +19,13 @@ export default function Features() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-              Key Features
+              Why Monthbook
             </div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Everything you need to succeed
+              Designed for your memories
             </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-              Our platform provides all the tools you need to streamline your workflow, collaborate with your team,
-              and achieve your goals.
+              We handle selection, layout, and print — so you can relive each month without the hassle.
             </p>
           </div>
         </div>
@@ -34,40 +33,40 @@ export default function Features() {
           <div className="grid gap-6">
             <div className="flex gap-4 items-start">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <LineChart className="h-5 w-5" />
+                <Smartphone className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Advanced Analytics</h3>
+                <h3 className="text-xl font-bold">Auto‑import from your phone</h3>
                 <p className="text-muted-foreground">
-                  Gain valuable insights with real-time data visualization and comprehensive reporting tools.
+                  Securely sync from your camera roll. Works with iOS and Android.
                 </p>
               </div>
             </div>
             <div className="flex gap-4 items-start">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <MessageSquare className="h-5 w-5" />
+                <Wand2 className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Team Collaboration</h3>
+                <h3 className="text-xl font-bold">Smart curation & layouts</h3>
                 <p className="text-muted-foreground">
-                  Work together seamlessly with integrated chat, file sharing, and project management features.
+                  We pick your best shots and design clean, modern spreads automatically.
                 </p>
               </div>
             </div>
             <div className="flex gap-4 items-start">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Shield className="h-5 w-5" />
+                <Truck className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Enterprise Security</h3>
+                <h3 className="text-xl font-bold">Premium print, free delivery</h3>
                 <p className="text-muted-foreground">
-                  Rest easy with bank-level encryption, role-based access control, and compliance certifications.
+                  Archival paper and beautiful finishes, shipped to your door every month.
                 </p>
               </div>
             </div>
           </div>
           <Image
-            src="/placeholder.svg?height=400&width=400&text=Features"
+            src="/placeholder.svg?height=400&width=400&text=Photobook+Features"
             width={400}
             height={400}
             alt="Features"

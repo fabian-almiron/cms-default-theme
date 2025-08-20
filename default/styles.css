@@ -1,50 +1,51 @@
 /* Default Theme Styles */
 @layer base {
   :root {
-    /* Default Theme Color Variables */
+    /* Monthbook Theme Color Variables */
     --default-background: 0 0% 100%;
-    --default-foreground: 222.2 84% 4.9%;
+    --default-foreground: 222.2 60% 6%;
     --default-card: 0 0% 100%;
-    --default-card-foreground: 222.2 84% 4.9%;
+    --default-card-foreground: 222.2 60% 6%;
     --default-popover: 0 0% 100%;
-    --default-popover-foreground: 222.2 84% 4.9%;
-    --default-primary: 221.2 83.2% 53.3%;
-    --default-primary-foreground: 210 40% 98%;
-    --default-secondary: 210 40% 96%;
-    --default-secondary-foreground: 222.2 84% 4.9%;
-    --default-muted: 210 40% 96%;
-    --default-muted-foreground: 215.4 16.3% 46.9%;
-    --default-accent: 210 40% 96%;
-    --default-accent-foreground: 222.2 84% 4.9%;
-    --default-destructive: 0 84.2% 60.2%;
-    --default-destructive-foreground: 210 40% 98%;
-    --default-border: 214.3 31.8% 91.4%;
-    --default-input: 214.3 31.8% 91.4%;
-    --default-ring: 221.2 83.2% 53.3%;
+    --default-popover-foreground: 222.2 60% 6%;
+    /* Warm coral primary with soft sand accents */
+    --default-primary: 8 75% 55%;
+    --default-primary-foreground: 0 0% 100%;
+    --default-secondary: 30 40% 96%;
+    --default-secondary-foreground: 24 30% 20%;
+    --default-muted: 30 40% 96%;
+    --default-muted-foreground: 24 12% 35%;
+    --default-accent: 24 45% 92%;
+    --default-accent-foreground: 24 30% 20%;
+    --default-destructive: 0 70% 50%;
+    --default-destructive-foreground: 0 0% 100%;
+    --default-border: 25 30% 88%;
+    --default-input: 25 30% 88%;
+    --default-ring: 8 75% 55%;
     --default-radius: 0.5rem;
   }
 
   .dark {
-    /* Default Theme Dark Mode Variables */
-    --default-background: 222.2 84% 4.9%;
-    --default-foreground: 210 40% 98%;
-    --default-card: 222.2 84% 4.9%;
-    --default-card-foreground: 210 40% 98%;
-    --default-popover: 222.2 84% 4.9%;
-    --default-popover-foreground: 210 40% 98%;
-    --default-primary: 217.2 91.2% 59.8%;
-    --default-primary-foreground: 222.2 84% 4.9%;
-    --default-secondary: 217.2 32.6% 17.5%;
-    --default-secondary-foreground: 210 40% 98%;
-    --default-muted: 217.2 32.6% 17.5%;
-    --default-muted-foreground: 215 20.2% 65.1%;
-    --default-accent: 217.2 32.6% 17.5%;
-    --default-accent-foreground: 210 40% 98%;
-    --default-destructive: 0 62.8% 30.6%;
-    --default-destructive-foreground: 210 40% 98%;
-    --default-border: 217.2 32.6% 17.5%;
-    --default-input: 217.2 32.6% 17.5%;
-    --default-ring: 224.3 76.3% 94.1%;
+    /* Monthbook Theme Dark Mode Variables */
+    --default-background: 222 40% 6%;
+    --default-foreground: 30 40% 96%;
+    --default-card: 222 40% 6%;
+    --default-card-foreground: 30 40% 96%;
+    --default-popover: 222 40% 6%;
+    --default-popover-foreground: 30 40% 96%;
+    --default-primary: 8 75% 60%;
+    --default-primary-foreground: 0 0% 100%;
+    --default-secondary: 24 20% 16%;
+    --default-secondary-foreground: 30 40% 96%;
+    --default-muted: 24 20% 16%;
+    --default-muted-foreground: 30 20% 70%;
+    --default-accent: 24 20% 16%;
+    --default-accent-foreground: 30 40% 96%;
+    --default-destructive: 0 62% 40%;
+    --default-destructive-foreground: 0 0% 100%;
+    --default-border: 24 20% 16%;
+    --default-input: 24 20% 16%;
+    --default-ring: 8 75% 60%;
   }
 }
 
